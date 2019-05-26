@@ -1,13 +1,10 @@
 競技プログラミングの精進記録です。
 
 - library
-
-ライブラリです。
+    - ライブラリです。
 
 - atcoder
-
-atcoder用
+    - atcoder用
 
 - etc
-
-その他
+    - その他
