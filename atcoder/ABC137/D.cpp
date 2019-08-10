@@ -1,0 +1,48 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+// def
+#define debug(x) cout << #x << ": " << x << endl
+#define out(x) cout << x << endl
+#define repeat(i, a, b) for (int i = (a); i < (b); i++)
+#define revrepeat(i, a, b) for (int i = (b)-1; i >= (a); i--)
+#define rep(i, n) for (int i = 0; i < (int)(n); i++)
+#define revrep(i, n) for (int i = (n)-1; i >= 0; i--)
+typedef long long ll;
+typedef pair<int, int> P;
+const int M = 1e9 + 7;
+const int INF = 1e9;
+const int MAX_V = 100 + 5;
+const int MAX_N = 1e5 + 5;
+
+int main() {
+    int n, m;
+    cin >> n >> m;
+    auto comp = [](const P &p1, const P &p2) {
+        return p1.first > p2.first;
+    };
+    auto comPair = [](const P &firstElof, const P &secondElof) {
+        return firstElof.second < secondElof.second;
+    };
+    priority_queue<P, vector<P>, decltype(comp)> escape(comp);
+    priority_queue<P, vector<P>, decltype(comPair)> que(comPair);
+    rep(i, n) {
+        int a, b;
+        cin >> a >> b;
+        escape.push(P(a, b));
+    }
+    ll ans = 0;
+    auto p1 = escape.top().first;
+    repeat(i, 1, m + 1) {
+        while (!escape.empty() && p1 <= i) {
+            que.push(escape.top());
+            escape.pop();
+            p1 = escape.top().first;
+        }
+        if (!que.empty()) {
+            ans += que.top().second;
+            que.pop();
+        }
+    }
+    cout << ans << endl;
+}

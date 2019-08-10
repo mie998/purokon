@@ -1,24 +1,59 @@
-// unionfind木を用いると効率的に実装ができる
+// kruskal の使い方
+#define MAX_E 10000
 
-struct edge { int u, v, cost; };
+struct edge {
+    int u;
+    int v;
+    int cost;
+};
 
-bool comp(const edge& e1, const edge& e2) {
-	return e1.cost < e2.cost;
+vector<edge> es;
+int V, E;
+
+// Union Find
+struct UnionFind {
+    vector<int> data;
+    UnionFind(int size) : data(size, -1) {}
+    bool unionSet(int x, int y) {
+        x = root(x);
+        y = root(y);
+
+        if (x != y) {
+            if (data[y] < data[x]) swap(x, y);
+            data[x] += data[y];
+            data[y] = x;
+        }
+        return x != y;
+    }
+    bool same(int x, int y) { return root(x) == root(y); }
+    int root(int x) { return data[x] < 0 ? x : data[x] = root(data[x]); }
+    int size(int x) { return -data[root(x)]; }
+};
+
+bool comp(const edge &e1, const edge &e2) {
+    return e1.cost < e2.cost;
 }
 
-edge es[MAX_E];
-int V,E;
-
 int kruskal() {
-	sort(es, es + E, comp); //edge.costが小さい順にsort
-	init_union_find()       //union-findの初期化
-	int res = 0;
-	for (int i = 0; i < E; i++) {
-		edge e = es[i];
-		if (!same(e.u, e.v)) {
-			unite(e.u, e.v);
-			res += e.cost;
-		}
-	}
-	return res;
+    sort(es.begin(), es.end(), comp);
+    UnionFind uf = UnionFind(V);
+    int res = 0;
+    for (auto &e : es) {
+        if (!uf.same(e.u, e.v)) {
+            uf.unionSet(e.u, e.v);
+            res += e.cost;
+        }
+    }
+    return res;
+}
+
+int main() {
+    cin >> V >> E;
+    for (int i = 0; i < E; i++) {
+        int from, to, cst;
+        cin >> from >> to >> cst; // from, to はそれぞれ -1 必須かも
+        es.push_back(edge{from, to, cst});
+        es.push_back(edge{to, from, cst});
+    }
+    cout << kruskal() << endl;
 }

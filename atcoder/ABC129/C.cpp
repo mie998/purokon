@@ -25,8 +25,8 @@ int main() {
         cin >> k;
         v.push_back(k);
     }
-    result = 1;
     result = (result * fib(v[0] - 1));
+    result = 1;
     for (i = 1; i < m; i++) {
         if (v[i] - v[i - 1] >= 2) {
             result = (result * fib(v[i - 1] - v[i] - 2));

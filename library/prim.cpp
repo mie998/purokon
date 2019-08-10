@@ -1,31 +1,21 @@
-// priority_queueを使うとO(|E|logV)に計算量が落ちる
-int cost[MAX_V][MAX_V]; //cost[u][v]は辺e=(u,v)のコスト（存在しない場合はINF)
-int mincost[MAX_V];     //集合Xからの辺の最小コスト
-bool used[MAX_V];       //頂点iがXに含まれているか
-int V;                  //頂点数
+// O(|E|log|V|)
+typedef pair<int, int> P; // (cst, to)
+vector<P> G[MAX];
+bool used[MAX];
 
 int prim() {
-	for (int i = 0; i < V; ++i) {
-		mincost[i] = INF;
-		used[i] = false;
-	}
-	mincost[0] = 0;
-	int res = 0;
-
-	while(true) {
-		int v = -1;
-		// Xに属さない頂点のうちXからの辺のコストが最小になる頂点を探す
-		for (int u = 0; u < V; u++) {
-			if (!used[u] && (v == 1 || mincost[u] < mincost[v])) v = u;
-		}
-
-		if (v == -1) break;
-		used[v] = true;   //頂点vをXに追加
-		res += mincost[v];//辺のコストを加える
-
-		for (int u = 0; u < V; u++) {
-			mincost[u] = min(mincost[u], cost[v][u]);
-		}
-	}
-	return res;
+    priority_queue<P, vector<P>, greater<P>> que;
+    memset(used, 0, sizeof(used));
+    que.push(P(0, 0));
+    int ret = 0;
+    while (!que.empty()) {
+        int cst = que.top().first, v = que.top().second;
+        que.pop();
+        if (used[v]) continue;
+        used[v] = 1;
+        ret += cst;
+        for (int i = 0; i < G[v].size(); i++)
+            que.push(P(G[v][i].first, G[v][i].second));
+    }
+    return ret;
 }
