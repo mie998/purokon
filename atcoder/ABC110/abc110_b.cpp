@@ -15,25 +15,23 @@ const int INF = 1e9;
 const int MAX_V = 1000 + 5;
 const int MAX_N = 1e5 + 5;
 
-int dp[MAX_V][MAX_V];
-
 int main() {
-    int n;
-    cin >> n;
-    rep(i, n) {
-        memset(dp, 0, sizeof(dp));
-        string s, t;
-        cin >> s >> t;
+    int n, m, x, y;
+    bool ok = false;
+    cin >> n >> m >> x >> y;
+    vector<int> X(n), Y(m);
+    rep(i, n) cin >> X[i];
+    rep(i, m) cin >> Y[i];
 
-        rep(i, s.size()) {
-            rep(j, t.size()) {
-                if (s[i] == t[j]) {
-                    dp[i + 1][j + 1] = dp[i][j] + 1;
-                } else {
-                    dp[i + 1][j + 1] = max(dp[i + 1][j], dp[i][j + 1]);
-                }
-            }
+    sort(X.begin(), X.end());
+    sort(Y.begin(), Y.end());
+    for (int i = x + 1; i <= y; i++) {
+        if (X.back() < i && Y[0] >= i) {
+            ok = true;
         }
-        cout << dp[s.size()][t.size()] << endl;
     }
+    if (ok)
+        cout << "No War" << endl;
+    else
+        cout << "War" << endl;
 }

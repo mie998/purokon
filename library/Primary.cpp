@@ -36,7 +36,7 @@ map<int, int> prime_factor(int n) {
 // Eratosthenes O(nloglog(n))
 int prime[MAX_N];     // i番目の素数
 bool is_prime[MAX_N]; // i が素数か否か　
-
+// n以下の素数の数を返す
 int sieve(int n) {
     int p = 0;
     for (int i = 0; i <= n; i++)

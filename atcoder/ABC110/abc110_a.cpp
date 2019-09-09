@@ -15,25 +15,11 @@ const int INF = 1e9;
 const int MAX_V = 1000 + 5;
 const int MAX_N = 1e5 + 5;
 
-int dp[MAX_V][MAX_V];
-
 int main() {
-    int n;
-    cin >> n;
-    rep(i, n) {
-        memset(dp, 0, sizeof(dp));
-        string s, t;
-        cin >> s >> t;
-
-        rep(i, s.size()) {
-            rep(j, t.size()) {
-                if (s[i] == t[j]) {
-                    dp[i + 1][j + 1] = dp[i][j] + 1;
-                } else {
-                    dp[i + 1][j + 1] = max(dp[i + 1][j], dp[i][j + 1]);
-                }
-            }
-        }
-        cout << dp[s.size()][t.size()] << endl;
+    vector<int> v(3);
+    rep(i, 3) {
+        cin >> v[i];
     }
+    sort(v.begin(), v.end());
+    cout << v[2] * 10 + v[1] + v[0] << endl;
 }

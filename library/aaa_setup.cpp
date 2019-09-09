@@ -89,7 +89,7 @@ long long fac[MAX];
 long long fact(int n) {
     if (n == 1) return fac[n] = 1;
     if (fac[n]) return fac[n];
-    return fac[n] = fact(n - 1) * n;
+    return fac[n] = (fact(n - 1) * n) % MOD;
 }
 
 // adjecent-list
@@ -102,7 +102,7 @@ vector<Edge> Graph[MAX];
 bool checked[MAX];
 int color[MAX];
 
-// how to use priority_queue
+// how to use priority_queue on pair
 auto comPair = [](const P &firstElof, const P &secondElof) {
     if (firstElof.second != secondElof.second)
         return firstElof.second < secondElof.second;
