@@ -9,7 +9,7 @@ using namespace std;
 #define revrepeat(i, a, b) for (int i = (b)-1; i >= (a); i--)
 #define rep(i, n) for (int i = 0; i < (int)(n); i++)
 #define revrep(i, n) for (int i = (n)-1; i >= 0; i--)
-typedef long long ll;
+typedef long long long long;
 const int M = 1e9 + 7;
 const int INF = 1e9;
 
@@ -50,6 +50,7 @@ long modpow(long m, long p) {
         return res * res % MOD;
     }
 }
+
 long calcComb(int a, int b) {
     if (b > a - b) return calcComb(a, a - b);
     long mul = 1;
@@ -110,3 +111,24 @@ auto comPair = [](const P &firstElof, const P &secondElof) {
         return firstElof.first > secondElof.first;
 };
 priority_queue<P, vector<P>, decltype(comPair)> que(comPair);
+
+long long gcd(long long a, long long b) {
+    if (b == 0) return a;
+    return gcd(b, a % b);
+}
+
+long long lcm(long long a, long long b) {
+    return a * b / gcd(a, b);
+}
+
+long long extgcd(long long a, long long b, long long &x, long long &y) {
+    long long d = a;
+    if (d != 0) {
+        d = extgcd(b, a % b, y, x);
+        y -= (a / b) * x;
+    } else {
+        x = 1;
+        y = 0;
+    }
+    return d;
+}

@@ -9,15 +9,28 @@ using namespace std;
 #define rep(i, n) for (int i = 0; i < (int)(n); i++)
 #define revrep(i, n) for (int i = (n)-1; i >= 0; i--)
 typedef long long ll;
-typedef pair<int, int> P;
+typedef pair<ll, ll> P;
 const int M = 1e9 + 7;
 const int INF = 1e9;
-const int MAX_V = 1000 + 5;
+const int MAX_V = 100 + 5;
 const int MAX_N = 1e5 + 5;
 
 int main() {
-    int a = 5000;
-    ll b = 1e18;
-    int c = b / a;
-    cout << c << endl;
+    string s;
+    cin >> s;
+    rep(i, s.length()) {
+        if (i % 2 == 0) {
+            if (s[i] == 'L') {
+                cout << "No" << endl;
+                return 0;
+            }
+        } else {
+            if (s[i] == 'R') {
+                cout << "No" << endl;
+                return 0;
+            }
+        }
+    }
+    cout << "Yes" << endl;
+    return 0;
 }

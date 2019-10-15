@@ -1,0 +1,10 @@
+login コマンド
+    $ oj login URL
+
+AtCoder
+    ID: MIE999
+    pass: r64ddXNevU2T7Z9
+
+開発元
+    https://kimiyuki.net/blog/2017/01/19/pr-online-judge-tools/
+
