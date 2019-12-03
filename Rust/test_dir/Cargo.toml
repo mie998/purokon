@@ -1,0 +1,6 @@
+[package]
+name = "test_dir"
+version = "0.1.0"
+authors = ["MIE999 <kei.west.post920@gmail.com>"]
+
+[dependencies]
