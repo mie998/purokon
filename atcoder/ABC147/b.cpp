@@ -16,4 +16,16 @@ const int MAX_V = 1000 + 5;
 const int MAX_N = 1e5 + 5;
 
 int main() {
+    string s;
+    cin >> s;
+    int n = s.length();
+    int ans = 0;
+    rep(i, n / 2) {
+        char a = s[i];
+        char b = s[n - 1 - i];
+        if (a != b) {
+            ans += 1;
+        }
+    }
+    cout << ans << endl;
 }
