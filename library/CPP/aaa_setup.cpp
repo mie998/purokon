@@ -9,13 +9,14 @@ using namespace std;
 #define revrepeat(i, a, b) for (int i = (b)-1; i >= (a); i--)
 #define rep(i, n) for (int i = 0; i < (int)(n); i++)
 #define revrep(i, n) for (int i = (n)-1; i >= 0; i--)
-typedef long long long long;
+typedef long long ll;
 const int M = 1e9 + 7;
 const int INF = 1e9;
 
 // typedef
 typedef pair<int, int> P;
 typedef tuple<int, int, int> P3;
+typedef vector<vector int> Graph;
 // sort by P.first (asd)
 bool comPair(const P &firstElof, const P &secondElof) {
     return firstElof.first < secondElof.first;
@@ -40,14 +41,14 @@ long long nCr(int n, int r) {
 }
 
 // save memory
-int MOD = 1e9 + 7;
+int mod = 1e9 + 7;
 long modpow(long m, long p) {
     if (p == 0) return 1;
     if (p % 2)
-        return m * modpow(m, p - 1) % MOD;
+        return m * modpow(m, p - 1) % mod;
     else {
         long res = modpow(m, p / 2);
-        return res * res % MOD;
+        return res * res % mod;
     }
 }
 
