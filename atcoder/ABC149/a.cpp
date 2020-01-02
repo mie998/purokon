@@ -17,9 +17,7 @@ const int MAX_V = 100000 + 5;
 const int MAX_N = 1e5 + 5;
 
 int main() {
-    ll n, a, b, c, d, e;
-    cin >> n >> a >> b >> c >> d >> e;
-    ll m = min(a, min(b, min(c, min(d, e))));
-    ll ans = (n + m - 1) / m + 4;
-    out(ans);
+    string t, s;
+    cin >> s >> t;
+    out(t + s);
 }

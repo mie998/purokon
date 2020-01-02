@@ -8,6 +8,7 @@ using namespace std;
 #define revrepeat(i, a, b) for (int i = (b)-1; i >= (a); i--)
 #define rep(i, n) for (int i = 0; i < (int)(n); i++)
 #define revrep(i, n) for (int i = (n)-1; i >= 0; i--)
+#define all(x) (x).begin(), (x).end()
 typedef long long ll;
 typedef pair<int, int> P;
 typedef vector<vector<int>> Graph;
@@ -17,9 +18,4 @@ const int MAX_V = 100000 + 5;
 const int MAX_N = 1e5 + 5;
 
 int main() {
-    ll n, a, b, c, d, e;
-    cin >> n >> a >> b >> c >> d >> e;
-    ll m = min(a, min(b, min(c, min(d, e))));
-    ll ans = (n + m - 1) / m + 4;
-    out(ans);
 }

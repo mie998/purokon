@@ -17,9 +17,13 @@ const int MAX_V = 100000 + 5;
 const int MAX_N = 1e5 + 5;
 
 int main() {
-    ll n, a, b, c, d, e;
-    cin >> n >> a >> b >> c >> d >> e;
-    ll m = min(a, min(b, min(c, min(d, e))));
-    ll ans = (n + m - 1) / m + 4;
-    out(ans);
+    ll a, b, k;
+    cin >> a >> b >> k;
+    if (a + b <= k) {
+        cout << "0 0" << endl;
+    } else if (a > k) {
+        cout << a - k << " " << b << endl;
+    } else {
+        cout << 0 << ' ' << a + b - k << endl;
+    }
 }
