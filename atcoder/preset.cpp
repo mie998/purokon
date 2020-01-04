@@ -16,6 +16,7 @@ const int M = 1e9 + 7;
 const ll INF = 1e9;
 const int MAX_V = 100000 + 5;
 const int MAX_N = 1e5 + 5;
+const double PI = acos(-1);
 
 int main() {
 }

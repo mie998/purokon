@@ -12,6 +12,7 @@ using namespace std;
 typedef long long ll;
 const int M = 1e9 + 7;
 const int INF = 1e9;
+const double PI = 3.1415926535;
 
 // typedef
 typedef pair<int, int> P;
