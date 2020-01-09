@@ -1,19 +1,3 @@
-// common include
-#include <bits/stdc++.h>
-using namespace std;
-
-// def
-#define debug(x) cout << #x << ": " << x << endl
-#define out(x) cout << x << endl
-#define repeat(i, a, b) for (int i = (a); i < (b); i++)
-#define revrepeat(i, a, b) for (int i = (b)-1; i >= (a); i--)
-#define rep(i, n) for (int i = 0; i < (int)(n); i++)
-#define revrep(i, n) for (int i = (n)-1; i >= 0; i--)
-typedef long long ll;
-const int M = 1e9 + 7;
-const int INF = 1e9;
-const double PI = 3.1415926535;
-
 // typedef
 typedef pair<int, int> P;
 typedef tuple<int, int, int> P3;
@@ -31,7 +15,7 @@ int dx[4] = {1, 0, -1, 0};
 int dy[4] = {0, 1, 0, -1};
 
 // Combination
-long long dp[MAX][MAX];
+long long dp[MAX_N][MAX_N];
 
 long long nCr(int n, int r) {
     if (n == r) return dp[n][r] = 1;
@@ -42,14 +26,13 @@ long long nCr(int n, int r) {
 }
 
 // save memory
-int mod = 1e9 + 7;
 long modpow(long m, long p) {
     if (p == 0) return 1;
     if (p % 2)
-        return m * modpow(m, p - 1) % mod;
+        return m * modpow(m, p - 1) % MOD;
     else {
         long res = modpow(m, p / 2);
-        return res * res % mod;
+        return res * res % MOD;
     }
 }
 
@@ -81,7 +64,7 @@ long calcComb(int a, int b) {
     return res;
 }
 
-long long fac[MAX], finv[MAX], inv[MAX];
+long long fac[MAX_N], finv[MAX_N], inv[MAX_N];
 // テーブルを作る前処理 from: https://qiita.com/drken/items/3b4fdf0a78e7a138cd9a
 void COMinit() {
     fac[0] = fac[1] = 1;
@@ -101,7 +84,7 @@ long long COM(int n, int k) {
 }
 
 // factorial
-long long fac[MAX];
+long long fac[MAX_N];
 
 long long fact(int n) {
     if (n == 1) return fac[n] = 1;
@@ -114,10 +97,10 @@ struct Edge {
     int to;
     int weight;
 };
-const int MAX = 1e5 + 5;
-vector<Edge> Graph[MAX];
-bool checked[MAX];
-int color[MAX];
+const int MAX_N = 1e5 + 5;
+vector<Edge> Graph[MAX_N];
+bool checked[MAX_N];
+int color[MAX_N];
 
 // how to use priority_queue on pair
 auto comPair = [](const P &firstElof, const P &secondElof) {
