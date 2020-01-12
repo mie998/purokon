@@ -18,4 +18,9 @@ const int MAX_V = 100000 + 5;
 const int MAX_N = 1e5 + 5;
 const double PI = acos(-1);
 
-int main() {}
+int main() {
+  char c;
+  cin >> c;
+  int ans = int(c) + 1;
+  out(char(ans));
+}

@@ -18,4 +18,16 @@ const int MAX_V = 100000 + 5;
 const int MAX_N = 1e5 + 5;
 const double PI = acos(-1);
 
-int main() {}
+int main() {
+  int n, k;
+  cin >> n >> k;
+  vector<ll> a(n);
+  rep(i, n) cin >> a[i];
+  sort(a.begin(), a.end(), greater<ll>());
+  ll sum = 0;
+  rep(i, n) {
+    sum += (a[i] * (n - 1 - i)) % M - (a[i] * i) % M;
+    sum %= M;
+  }
+  out(sum);
+}

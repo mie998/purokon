@@ -18,4 +18,26 @@ const int MAX_V = 100000 + 5;
 const int MAX_N = 1e5 + 5;
 const double PI = acos(-1);
 
-int main() {}
+int main() {
+  int n, m;
+  cin >> n >> m;
+  vector<int> p(m);
+  vector<string> s(m);
+  rep(i, m) cin >> p[i] >> s[i];
+  int ac_cnt = 0;
+  int pena_cnt = 0;
+  vector<int> acc(n, 0);
+  vector<bool> lock(n, false);
+  rep(i, m) {
+    int num = p[i] - 1;
+    string res = s[i];
+    if (res == "AC" && !lock[num]) {
+      ac_cnt++;
+      lock[num] = true;
+      pena_cnt += acc[num];
+    } else {
+      acc[num]++;
+    }
+  }
+  cout << ac_cnt << " " << pena_cnt << endl;
+}

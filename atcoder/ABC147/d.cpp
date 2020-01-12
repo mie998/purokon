@@ -34,7 +34,7 @@ int main() {
         cin >> a[i];
     }
     ll ans = 0;
-    sort(a.begin(), a.end(), greater<ll>());
+    sort(a.begin(), a.end(), greater<int>());
     ll k = ceil(log2(a[0]));
     for (ll i = 0; i <= k; i++) {
         ll cnt_zero = 0;

@@ -18,4 +18,16 @@ const int MAX_V = 100000 + 5;
 const int MAX_N = 1e5 + 5;
 const double PI = acos(-1);
 
-int main() {}
+int main() {
+  int n, k, m;
+  cin >> n >> k >> m;
+  vector<int> a(n - 1);
+  rep(i, n - 1) cin >> a[i];
+  int sum = 0;
+  rep(i, n - 1) sum += a[i];
+  int ans = m * n - sum;
+  if (ans <= k)
+    out(max(0, ans));
+  else
+    out(-1);
+}
