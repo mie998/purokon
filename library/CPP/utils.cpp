@@ -14,18 +14,6 @@ bool compairTuple1(const P3 &firstElof, const P3 &secondElof) {
 int dx[4] = {1, 0, -1, 0};
 int dy[4] = {0, 1, 0, -1};
 
-// Combination
-long long dp[MAX_N][MAX_N];
-
-long long nCr(int n, int r) {
-    if (n == r) return dp[n][r] = 1;
-    if (r == 0) return dp[n][r] = 1;
-    if (r == 1) return dp[n][r] = n;
-    if (dp[n][r]) return dp[n][r];
-    return dp[n][r] = (nCr(n - 1, r) + nCr(n - 1, r - 1)) % M;
-}
-
-// save memory
 long modpow(long m, long p) {
     if (p == 0) return 1;
     if (p % 2)
@@ -50,6 +38,7 @@ ll modinv(ll a, ll m) {
     return u;
 }
 
+// momory_safe
 long calcComb(int a, int b) {
     if (b > a - b) return calcComb(a, a - b);
     long mul = 1;
@@ -70,7 +59,7 @@ void COMinit() {
     fac[0] = fac[1] = 1;
     finv[0] = finv[1] = 1;
     inv[1] = 1;
-    for (int i = 2; i < MAX; i++) {
+    for (int i = 2; i < MAX_N; i++) {
         fac[i] = fac[i - 1] * i % MOD;
         inv[i] = MOD - inv[MOD % i] * (MOD / i) % MOD;
         finv[i] = finv[i - 1] * inv[i] % MOD;
@@ -82,10 +71,7 @@ long long COM(int n, int k) {
     if (n < 0 || k < 0) return 0;
     return fac[n] * (finv[k] * finv[n - k] % MOD) % MOD;
 }
-
 // factorial
-long long fac[MAX_N];
-
 long long fact(int n) {
     if (n == 1) return fac[n] = 1;
     if (fac[n]) return fac[n];

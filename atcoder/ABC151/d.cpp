@@ -25,49 +25,58 @@ bool flag[23][23];
 int ans[23][23];
 int h, w;
 
+// void print(vector<vector<int>> &v) {
+//     for (int i = 0; i < v.size(); i++) {
+//         for (int j = 0; j < v[i].size(); j++) {
+//             debug(v[i][j]);
+//         }
+//     }
+// }
+
 int bfs(P start, P goal) {
-  memset(flag, false, sizeof(flag));
-  memset(ans, 0, sizeof(ans));
-  queue<P> que;
-  flag[start.first][start.second] = 1;
-  que.push(P(start.first, start.second));
-  while (!que.empty()) {
-    P p = que.front();
-    que.pop();
-    rep(i, 4) {
-      int x = p.second + dx[i];
-      int y = p.first + dy[i];
-      if (0 <= x && x <= w && 0 <= y && y <= h && !flag[y][x] &&
-          maze[y][x] == '.') {
-        flag[y][x] = 1;
-        ans[y][x] = ans[p.first][p.second] + 1;
-        que.push(P(y, x));
-      }
+    memset(flag, false, sizeof(flag));
+    memset(ans, 0, sizeof(ans));
+    queue<P> que;
+    flag[start.first][start.second] = 1;
+    que.push(P(start.first, start.second));
+    while (!que.empty()) {
+        P p = que.front();
+        que.pop();
+        rep(i, 4) {
+            int x = p.second + dx[i];
+            int y = p.first + dy[i];
+            if (0 <= x && x <= w && 0 <= y && y <= h && !flag[y][x] &&
+                maze[y][x] == '.') {
+                flag[y][x] = 1;
+                ans[y][x] = ans[p.first][p.second] + 1;
+                que.push(P(y, x));
+            }
+        }
     }
-  }
-  return ans[goal.first][goal.second];
+    return ans[goal.first][goal.second];
 }
 
 int main() {
-  cin >> h >> w;
-  rep(i, h) {
-    rep(j, w) { cin >> maze[i][j]; }
-  }
-  int res = 0;
-  P start;
-  P goal;
-  rep(i, h) {
-    rep(j, w) {
-      rep(l, h) {
-        rep(m, w) {
-          if (maze[i][j] == '.' && maze[l][m] == '.') {
-            start = P(i, j);
-            goal = P(l, m);
-            res = max(res, bfs(start, goal));
-          }
-        }
-      }
+    cin >> h >> w;
+    rep(i, h) {
+        rep(j, w) { cin >> maze[i][j]; }
     }
-  }
-  out(res);
+    printArray(maze);
+    int res = 0;
+    P start;
+    P goal;
+    rep(i, h) {
+        rep(j, w) {
+            rep(l, h) {
+                rep(m, w) {
+                    if (maze[i][j] == '.' && maze[l][m] == '.') {
+                        start = P(i, j);
+                        goal = P(l, m);
+                        res = max(res, bfs(start, goal));
+                    }
+                }
+            }
+        }
+    }
+    out(res);
 }
