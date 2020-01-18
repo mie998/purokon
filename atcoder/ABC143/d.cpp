@@ -19,4 +19,23 @@ const int MAX_N = 1e5 + 5;
 const double PI = acos(-1);
 
 int main() {
+    int n;
+    cin >> n;
+    vector<int> l(n);
+    rep(i, n) cin >> l[i];
+    sort(all(l));
+    int ans = 0;
+    for (int big = 0; big < n; big++) {
+        for (int mid = 0; mid < big; mid++) {
+            auto iter = upper_bound(all(l), l[big] - l[mid]);
+            auto small = iter - l.begin();
+            ans += max(mid - small, (long)0);
+            // debug(big);
+            // debug(mid);
+            // debug(small);
+            // debug(ans);
+            // out(" ");
+        }
+    }
+    out(ans);
 }

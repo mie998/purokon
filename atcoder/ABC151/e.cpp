@@ -32,8 +32,10 @@ void COMinit() {
 }
 // 二項係数計算
 long long COM(int n, int k) {
-    if (n < k) return 0;
-    if (n < 0 || k < 0) return 0;
+    if (n < k)
+        return 0;
+    if (n < 0 || k < 0)
+        return 0;
     return fac[n] * (finv[k] * finv[n - k] % MOD) % MOD;
 }
 
@@ -44,16 +46,16 @@ struct mint {
     mint(ll value = 0) : value((value % MOD + MOD) % MOD) {}
 
     mint pow(ll t) const {
-        if (!t) return 1;
+        if (!t)
+            return 1;
         mint a = pow(t >> 1);
         a *= a;
-        if (t & 1) a *= *this;
+        if (t & 1)
+            a *= *this;
         return a;
     }
 
-    mint pow(mint m) const {
-        return pow(m.value);
-    }
+    mint pow(mint m) const { return pow(m.value); }
 
     mint inv() const {
         ll a = value, b = MOD, u = 1, v = 0;
@@ -69,20 +71,20 @@ struct mint {
     }
 
     mint &operator+=(const mint a) {
-        if ((value += a.value) >= MOD) value -= MOD;
+        if ((value += a.value) >= MOD)
+            value -= MOD;
         return *this;
     }
     mint &operator-=(const mint a) {
-        if ((value += MOD - a.value) >= MOD) value -= MOD;
+        if ((value += MOD - a.value) >= MOD)
+            value -= MOD;
         return *this;
     }
     mint &operator*=(const mint a) {
         (value *= a.value) %= MOD;
         return *this;
     }
-    mint &operator/=(const mint a) {
-        return (*this) *= a.inv();
-    }
+    mint &operator/=(const mint a) { return (*this) *= a.inv(); }
 
     mint operator+(const mint a) const {
         mint res(*this);
