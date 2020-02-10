@@ -117,3 +117,11 @@ long long extgcd(long long a, long long b, long long &x, long long &y) {
     }
     return d;
 }
+
+int string_to_int(string s) {
+    int ans = 0;
+    for (int i = 0; i < s.size(); i++) {
+        ans += (s[i] - '0') * pow(10, s.size() - 1 - i);
+    }
+    return ans;
+}
