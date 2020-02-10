@@ -10,13 +10,21 @@ using namespace std;
 #define revrep(i, n) for (int i = (n)-1; i >= 0; i--)
 #define all(x) (x).begin(), (x).end()
 typedef long long ll;
+typedef long double ld;
 typedef pair<int, int> P;
+typedef complex<ld> Point;
 typedef vector<vector<int>> Graph;
-const int M = 1e9 + 7;
-const ll INF = 1e9;
-const int MAX_V = 100000 + 5;
+const int MOD = 1e9 + 7;
+const int INF = 1e9;
+const int MAX_V = 1e5 + 5;
 const int MAX_N = 1e5 + 5;
 const double PI = acos(-1);
 
 int main() {
+    int h, w, n;
+    cin >> h >> w >> n;
+    int ma = max(h, w);
+    int ans = (ma - 1 + n) / ma;
+    out(ans);
+    return 0;
 }

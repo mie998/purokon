@@ -85,33 +85,27 @@ struct mint {
     }
 };
 
-long modpow(long m, long p) {
-    if (p == 0) return 1;
-    if (p % 2)
-        return m * modpow(m, p - 1) % MOD;
-    else {
-        long res = modpow(m, p / 2);
-        return res * res % MOD;
+long long gcd(long long a, long long b) {
+    if (b == 0) return a;
+    return gcd(b, a % b);
+}
+
+long long lcm(long long a, long long b) {
+    return a * b / gcd(a, b);
+}
+
+// factorization O(sqrt(n))
+map<int, int> prime_factor(int n) {
+    map<int, int> res;
+    for (int i = 2; i * i <= n; i++) {
+        while (n % i == 0) {
+            ++res[i];
+            n /= i;
+        }
     }
+    if (n != 1) res[n] = 1;
+    return res;
 }
 
 int main() {
-    int n;
-    cin >> n;
-    vector<ll> a(n);
-    mint ans = 0;
-    rep(i, n) cin >> a[i];
-    rep(i, 60) {
-        ll cnt_zero = 0;
-        ll cnt_one = 0;
-        rep(j, n) {
-            if ((a[j] >> i) & 1)
-                cnt_one++;
-            else
-                cnt_zero++;
-        }
-        ans += ((cnt_one * cnt_zero) % MOD) * modpow(2, i);
-    }
-    out(ans.value);
-    return 0;
 }
