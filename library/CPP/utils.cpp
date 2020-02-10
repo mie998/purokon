@@ -125,3 +125,7 @@ int string_to_int(string s) {
     }
     return ans;
 }
+
+int char_to_int(char c) {
+    return c - '0';
+}
