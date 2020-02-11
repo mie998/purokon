@@ -28,5 +28,14 @@ const int MAX_N = 1e5 + 5;
 const double PI = acos(-1);
 
 int main() {
+    string s, t, u;
+    int a, b;
+    cin >> s >> t >> a >> b >> u;
+    if (s == u) {
+        a--;
+    } else {
+        b--;
+    }
+    cout << a << " " << b << endl;
     return 0;
 }

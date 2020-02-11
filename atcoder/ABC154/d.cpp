@@ -28,5 +28,20 @@ const int MAX_N = 1e5 + 5;
 const double PI = acos(-1);
 
 int main() {
+    ll n, k;
+    cin >> n >> k;
+    vl p(n);
+    rep(i, n) cin >> p[i];
+    vl cusum(n);
+    cusum[0] = p[0];
+    ll ma = 0;
+    repeat(i, 1, n) cusum[i] = cusum[i - 1] + p[i];
+    repeat(i, k, n) ma = max(ma, cusum[i] - cusum[i - k]);
+    if (n == k)
+        ma = cusum[n - 1];
+    // debug(ma);
+    SPC(12);
+    double ans = (ma + k) / 2.0;
+    out(ans);
     return 0;
 }

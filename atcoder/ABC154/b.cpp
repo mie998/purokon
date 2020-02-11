@@ -28,5 +28,11 @@ const int MAX_N = 1e5 + 5;
 const double PI = acos(-1);
 
 int main() {
+    string s;
+    cin >> s;
+    rep(i, s.size()) {
+        s[i] = 'x';
+    }
+    out(s);
     return 0;
 }

@@ -9,8 +9,8 @@ using namespace std;
 #define rep(i, n) for (int i = 0; i < (int)(n); i++)
 #define revrep(i, n) for (int i = (n)-1; i >= 0; i--)
 #define all(x) (x).begin(), (x).end()
-#define CYES cout << "Yes" << endl
-#define CNO cout << "No" << endl
+#define CYES cout << "YES" << endl
+#define CNO cout << "NO" << endl
 #define SPC(x) cout << fixed << setprecision(x)
 
 typedef long long ll;
@@ -28,5 +28,19 @@ const int MAX_N = 1e5 + 5;
 const double PI = acos(-1);
 
 int main() {
+    int n;
+    cin >> n;
+    vi a(n);
+    rep(i, n) cin >> a[i];
+    sort(all(a));
+    bool ok = true;
+    rep(i, n - 1) {
+        if (a[i] == a[i + 1])
+            ok = false;
+    }
+    if (ok)
+        CYES;
+    else
+        CNO;
     return 0;
 }

@@ -9,8 +9,16 @@ using namespace std;
 #define rep(i, n) for (int i = 0; i < (int)(n); i++)
 #define revrep(i, n) for (int i = (n)-1; i >= 0; i--)
 #define all(x) (x).begin(), (x).end()
+#define CYES cout << "Yes" << endl
+#define CNO cout << "No" << endl
+#define SPC(x) cout << fixed << setprecision(x)
+
 typedef long long ll;
 typedef long double ld;
+typedef vector<int> vi;
+typedef vector<vector<int>> vii;
+typedef vector<ll> vl;
+typedef vector<vector<ll>> vll;
 typedef pair<int, int> P;
 typedef complex<ld> Point;
 typedef vector<vector<int>> Graph;
@@ -18,100 +26,40 @@ const int MOD = 1e9 + 7;
 const int INF = 1e9;
 const int MAX_V = 1e5 + 5;
 const int MAX_N = 1e5 + 5;
-const double PI = acos(-1);
+const double PI = acos(-1L);
 
-struct mint {
-    // Preparation: MOD is already defined.
-    ll value;
+vi operation;
+vi dp;
 
-    mint(ll value = 0) : value((value % MOD + MOD) % MOD) {}
+int rec(int n) {
+    if (n == 0)
+        return 0;
 
-    mint pow(ll t) const {
-        if (!t) return 1;
-        mint a = pow(t >> 1);
-        a *= a;
-        if (t & 1) a *= *this;
-        return a;
-    }
-
-    mint pow(mint m) const {
-        return pow(m.value);
-    }
-
-    mint inv() const {
-        ll a = value, b = MOD, u = 1, v = 0;
-        while (b) {
-            ll t = a / b;
-            a -= t * b;
-            swap(a, b);
-            u -= t * v;
-            swap(u, v);
+    if (dp[n] == INF) {
+        int res = INF;
+        for (auto op : operation) {
+            if (n - op >= 0) {
+                res = min(res, rec(n - op) + 1);
+            }
         }
-        u %= MOD;
-        return u;
+        dp[n] = res;
     }
 
-    mint &operator+=(const mint a) {
-        if ((value += a.value) >= MOD) value -= MOD;
-        return *this;
-    }
-    mint &operator-=(const mint a) {
-        if ((value += MOD - a.value) >= MOD) value -= MOD;
-        return *this;
-    }
-    mint &operator*=(const mint a) {
-        (value *= a.value) %= MOD;
-        return *this;
-    }
-    mint &operator/=(const mint a) {
-        return (*this) *= a.inv();
-    }
-
-    mint operator+(const mint a) const {
-        mint res(*this);
-        return res += a;
-    }
-    mint operator-(const mint a) const {
-        mint res(*this);
-        return res -= a;
-    }
-    mint operator*(const mint a) const {
-        mint res(*this);
-        return res *= a;
-    }
-    mint operator/(const mint a) const {
-        mint res(*this);
-        return res /= a;
-    }
-};
-
-long modpow(long m, long p) {
-    if (p == 0) return 1;
-    if (p % 2)
-        return m * modpow(m, p - 1) % MOD;
-    else {
-        long res = modpow(m, p / 2);
-        return res * res % MOD;
-    }
+    return dp[n];
 }
 
 int main() {
     int n;
     cin >> n;
-    vector<ll> a(n);
-    mint ans = 0;
-    rep(i, n) cin >> a[i];
-    rep(i, 60) {
-        ll cnt_zero = 0;
-        ll cnt_one = 0;
-        rep(j, n) {
-            if ((a[j] >> i) & 1)
-                cnt_one++;
-            else
-                cnt_zero++;
-        }
-        ans += ((cnt_one * cnt_zero) % MOD) * modpow(2, i);
+    operation.push_back(1);
+    for (int i = 6; i <= n; i *= 6) {
+        operation.push_back(i);
     }
-    out(ans.value);
-    return 0;
+    for (int i = 9; i <= n; i *= 9) {
+        operation.push_back(i);
+    }
+
+    dp = vi(n + 1, INF);
+    rec(n);
+    out(dp[n]);
 }

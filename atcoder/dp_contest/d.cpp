@@ -27,6 +27,37 @@ const int MAX_V = 1e5 + 5;
 const int MAX_N = 1e5 + 5;
 const double PI = acos(-1);
 
+ll dp[105][100005];
+int weight[105];
+int value[105];
+
 int main() {
+    int n, w;
+    cin >> n >> w;
+    rep(i, n) {
+        cin >> weight[i] >> value[i];
+    }
+    repeat(i, 1, w + 1) {
+        dp[0][i] = -INF;
+    }
+
+    rep(i, n) {
+        rep(x, w + 1) {
+            if (x - weight[i] >= 0)
+                dp[i + 1][x] = max(dp[i][x], dp[i][x - weight[i]] + value[i]);
+            else
+                dp[i + 1][x] = dp[i][x];
+
+            debug(i);
+            debug(x);
+            debug(dp[i][x]);
+        }
+    }
+
+    ll res = -INF;
+    rep(i, w) {
+        res = max(res, dp[n][i]);
+    }
+    out(dp[n][w]);
     return 0;
 }

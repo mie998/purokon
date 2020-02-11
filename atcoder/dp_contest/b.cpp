@@ -27,6 +27,28 @@ const int MAX_V = 1e5 + 5;
 const int MAX_N = 1e5 + 5;
 const double PI = acos(-1);
 
+int dp[MAX_N];
+int h[MAX_N];
+
 int main() {
+    int n, k;
+    cin >> n >> k;
+    rep(i, n) {
+        dp[i] = INF;
+        cin >> h[i];
+    }
+
+    dp[0] = 0;
+
+    rep(i, n) {
+        repeat(j, 1, k + 1) {
+            if (i + j < n) dp[i + j] = min(dp[i + j], dp[i] + abs(h[i] - h[i + j]));
+        }
+
+        // debug(i);
+        // debug(dp[i]);
+    }
+
+    out(dp[n - 1]);
     return 0;
 }
