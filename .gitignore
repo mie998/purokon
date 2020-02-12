@@ -1,5 +1,5 @@
 .vscode
 *a.out
 .idea
-*/input.txt
-*/test.cpp
+**/input.txt
+**/test.cpp
