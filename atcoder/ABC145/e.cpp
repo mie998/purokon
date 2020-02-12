@@ -7,7 +7,7 @@ using namespace std;
 #define repeat(i, a, b) for (int i = (a); i < (b); i++)
 #define revrepeat(i, a, b) for (int i = (b)-1; i >= (a); i--)
 #define rep(i, n) for (int i = 0; i < (int)(n); i++)
-#define revrep(i, n) for (int i = (n)-1; i >= 0; i--)
+#define revrep(i, n) for (int i = (n)-1; i > 0; i--)
 #define all(x) (x).begin(), (x).end()
 #define CYES cout << "Yes" << endl
 #define CNO cout << "No" << endl
@@ -50,39 +50,53 @@ int main() {
     int n, t;
     cin >> n >> t;
     vector<P> a(n);
-    auto comPair = [](const P &firstElof, const P &secondElof) {
-        return firstElof.first < secondElof.second;
-    };
     rep(i, n) {
         cin >> a[i].first >> a[i].second;
     }
-    sort(all(a), comPair);
 
-    vii dp(3050, vi(3050, 0));
-    vector<bool> used(n, false);
+    vii dp1(3050, vi(3050, 0));
+    vii dp2(3050, vi(3050, 0));
+
     rep(i, n) {
         auto p = a[i];
-        used[i] = true;
         rep(j, t + 1) {
-            if (j == t - 1) {
-                auto idx = n - 1;
-                if (used[idx])
-                    continue;
-                p = a[idx];
-                chmax(dp[i + 1][t], dp[i][j] + p.second);
+            if (j + p.first <= t) {
+                chmax(dp1[i + 1][j + p.first], dp1[i][j] + p.second);
             }
 
-            if (j + p.second <= t) {
-                chmax(dp[i + 1][j + p.first], dp[i][j] + p.second);
-            }
+            chmax(dp1[i + 1][j], dp1[i][j]);
 
-            chmax(dp[i + 1][j], dp[i][j]);
-
-            debug(i);
-            debug(j);
-            debug(dp[i][j]);
+            // debug(i);
+            // debug(j);
+            // debug(dp1[i][j]);
         }
     }
-    out(dp[n][t]);
+
+    reverse(all(a));
+    rep(i, n) {
+        auto p = a[i];
+        rep(j, t + 1) {
+            if (j + p.first <= t) {
+                chmax(dp2[i + 1][j + p.first], dp2[i][j] + p.second);
+            }
+
+            chmax(dp2[i + 1][j], dp2[i][j]);
+
+            // debug(i);
+            // debug(j);
+            // debug(dp2[i][j]);
+        }
+    }
+
+    reverse(all(a));
+    int ans = 0;
+    rep(i, n) {
+        rep(j, t) {
+            chmax(ans, dp1[i][j] + dp2[n - i - 1][t - 1 - j] + a[i].second);
+
+            // debug(ans);
+        }
+    }
+    out(ans);
     return 0;
 }

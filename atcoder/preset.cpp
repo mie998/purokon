@@ -12,6 +12,8 @@ using namespace std;
 #define CYES cout << "Yes" << endl
 #define CNO cout << "No" << endl
 #define SPC(x) cout << fixed << setprecision(x)
+#define ZERO(a) memset(a, 0, sizeof(a))
+#define MINUS(a) memset(a, 0xff, sizeof(a))
 
 typedef long long ll;
 typedef long double ld;
