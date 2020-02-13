@@ -1,10 +1,13 @@
-競技プログラミングの精進記録です。
+## What's this?
+My code store for competitive programming.  
+- [atcoder](https://atcoder.jp/users/MIE999)
 
-- library
-    - ライブラリです。
+## Directory structure
+- <b>atcoder</b>  
+All of my submission history on atcoder.
 
-- atcoder
-    - atcoder用
+- **etc**  
+Some usefun tools.
 
-- etc
-    - その他
+- **library**   
+I allow anybody to use these codes.
