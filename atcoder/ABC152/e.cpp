@@ -108,4 +108,36 @@ map<int, int> prime_factor(int n) {
 }
 
 int main() {
+    int n;
+    cin >> n;
+    vector<int> a(n);
+    rep(i, n) cin >> a[i];
+    map<int, int> all_lcm;
+    vector<map<int, int>> factorizations(n);
+    rep(i, n) factorizations[i] = prime_factor(a[i]);
+    for (auto p : factorizations) {
+        for (auto m : p) {
+            all_lcm[m.first] = max(m.second, all_lcm[m.first]);
+        }
+    }
+
+    mint ans(0);
+    rep(i, n) {
+        map<int, int> cp_all_lcm = all_lcm;
+        mint cnt(1);
+        for (auto p : factorizations[i]) {
+            cp_all_lcm[p.first] -= p.second;
+            // debug(p.first);
+            // debug(p.second);
+        }
+        for (auto p : all_lcm) {
+            cnt.value *= pow(p.first, cp_all_lcm[p.first]);
+            // debug(i);
+            // debug(p.first);
+            // debug(cp_all_lcm[p.first]);
+            // debug(cnt.value);
+        }
+        ans += cnt.value;
+    }
+    out(ans.value);
 }
