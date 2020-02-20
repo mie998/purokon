@@ -32,54 +32,60 @@ const double PI = acos(-1);
 int main() {
     ll n, k;
     cin >> n >> k;
-    vl Z, N, P;
+    vl a(n);
     rep(i, n) {
-        ll a;
-        cin >> a;
-        if (a == 0)
-            Z.push_back(a);
-        else if (a < 0)
-            N.push_back(a);
-        else
-            P.push_back(a);
+        cin >> a[i];
     }
-    ll AN_size = N.size() * P.size();
-    ll AP_size = N.size() * (N.size() - 1) / 2 + P.size() * (P.size() - 1) / 2;
-    ll AZ_size = N.size() * Z.size() + P.size() * Z.size();
-    // debug(AN_size);
-    // debug(AP_size);
-    // debug(AZ_size);
-    ll ans = 0;
-    if (k <= AN_size) {
-        vl AN;
-        for (int n : N) {
-            for (int p : P) {
-                AN.push_back(n * p);
+    sort(all(a));
+
+    ll ub = 1e18, lb = -1e18;
+    while (ub - lb > 1) {
+        ll mid = (ub + lb) / 2;
+        auto is_smaller = [&](ll x) {
+            ll cnt = 0;
+            rep(i, n) {
+                if (a[i] >= 0) {
+                    ll l = -1, r = n;
+                    while (r - l > 1) {
+                        ll o = (l + r) / 2;
+                        if (a[i] * a[o] < x) {
+                            l = o;
+                        } else {
+                            r = o;
+                        }
+                        // debug(l);
+                        // debug(r);
+                        // debug(o);
+                    }
+                    cnt += r;
+                } else {
+                    ll l = -1, r = n;
+                    while (r - l > 1) {
+                        ll o = (l + r) / 2;
+                        if (a[i] * a[o] < x) {
+                            r = o;
+                        } else {
+                            l = o;
+                        }
+                        // debug(l);
+                        // debug(r);
+                        // debug(o);
+                    }
+                    cnt += n - r;
+                }
+
+                if (a[i] * a[i] < x) cnt--;
             }
+            cnt /= 2;
+            return cnt < k;
+        };
+
+        // debug(mid);
+        if (is_smaller(mid)) {
+            lb = mid;
+        } else {
+            ub = mid;
         }
-        sort(all(AN));
-        ans = AN[k];
-    } else if (k <= AN_size + AZ_size) {
-        ans = 0;
-    } else {
-        vl AP;
-        rep(i, N.size()) {
-            repeat(j, i + 1, N.size()) {
-                ll n1 = N[i];
-                ll n2 = N[j];
-                AP.push_back(n1 * n2);
-            }
-        }
-        rep(i, P.size()) {
-            repeat(j, i + 1, P.size()) {
-                ll p1 = P[i];
-                ll p2 = P[j];
-                AP.push_back(p1 * p2);
-            }
-        }
-        sort(all(AP));
-        ans = AP[k - AN_size - AZ_size];
     }
-    out(ans);
-    return 0;
+    out(lb);
 }
