@@ -14,7 +14,7 @@ bool compairTuple1(const P3 &firstElof, const P3 &secondElof) {
 int dx[4] = {1, 0, -1, 0};
 int dy[4] = {0, 1, 0, -1};
 
-long modpow(long m, long p) {
+long long modpow(long long m, long long p) {
     if (p == 0) return 1;
     if (p % 2)
         return m * modpow(m, p - 1) % MOD;

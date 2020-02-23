@@ -4,20 +4,29 @@ using namespace std;
 // def
 #define debug(x) cout << #x << ": " << x << endl
 #define out(x) cout << x << endl
-#define repeat(i, a, b) for (int i = (a); i < (b); i++)
+#define repeat(i, a, b) for (ll i = (a); i < (b); i++)
 #define revrepeat(i, a, b) for (int i = (b)-1; i >= (a); i--)
 #define rep(i, n) for (int i = 0; i < (int)(n); i++)
 #define revrep(i, n) for (int i = (n)-1; i >= 0; i--)
 #define all(x) (x).begin(), (x).end()
+#define CYES cout << "Yes" << endl
+#define CNO cout << "No" << endl
+#define SPC(x) cout << fixed << setprecision(x)
+#define ZERO(a) memset(a, 0, sizeof(a))
+#define MINUS(a) memset(a, 0xff, sizeof(a))
+
 typedef long long ll;
 typedef long double ld;
+typedef vector<int> vi;
+typedef vector<vector<int>> vii;
+typedef vector<ll> vl;
+typedef vector<vector<ll>> vll;
 typedef pair<int, int> P;
 typedef complex<ld> Point;
-typedef vector<vector<int>> Graph;
 const int MOD = 1e9 + 7;
 const int INF = 1e9;
 const int MAX_V = 1e5 + 5;
-const int MAX_N = 1e5 + 5;
+const int MAX_N = 1e9 + 5;
 const double PI = acos(-1);
 
 struct mint {
@@ -85,54 +94,27 @@ struct mint {
     }
 };
 
-struct Sieve {
-    int n;
-    vector<int> f, primes;
-    Sieve(int n) : n(n), f(n + 1) {
-        f[0] = f[1] = -1;
-        for (long long i = 2; i <= n; i++) {
-            if (f[i]) continue;
-            primes.push_back(i);
-            f[i] = i;
-            for (long long j = i * i; j <= n; j += i) {
-                if (!f[j]) f[j] = i;
-            }
-        }
+long long finv[200005], inv[200005];
+ll n;
+// テーブルを作る前処理 from: https://qiita.com/drken/items/3b4fdf0a78e7a138cd9a
+void COMinit() {
+    finv[0] = finv[1] = 1;
+    inv[1] = 1;
+    for (ll i = 2; i <= 200000; i++) {
+        inv[i] = MOD - inv[MOD % i] * (MOD / i) % MOD;
+        finv[i] = finv[i - 1] * inv[i] % MOD;
     }
-    bool isPrime(int x) { return f[x] == x; }
-    vector<int> factorList(int x) {
-        vector<int> res;
-        while (x != 1) {
-            res.push_back(f[x]);
-            x /= f[x];
-        }
-        return res;
+}
+// 二項係数計算
+long long COM(int k) {
+    mint fac(1);
+    for (ll i = n - k + 1; i < n + 1; i++) {
+        fac *= i;
     }
-    vector<pair<int, int>> factor(int x) {
-        vector<int> fl = factorList(x);
-        if (fl.size() == 0) return {};
-        vector<pair<int, int>> res(1, pair<int, int>(fl[0], 0));
-        for (int p : fl) {
-            if (res.back().first == p) {
-                res.back().second++;
-            } else {
-                res.emplace_back(p, 1);
-            }
-        }
-        return res;
-    }
-};
-
-long long gcd(long long a, long long b) {
-    if (b == 0) return a;
-    return gcd(b, a % b);
+    return fac.value * (finv[k] % MOD) % MOD;
 }
 
-long long lcm(long long a, long long b) {
-    return a * b / gcd(a, b);
-}
-
-long modpow(long m, long p) {
+long long modpow(long long m, long long p) {
     if (p == 0) return 1;
     if (p % 2)
         return m * modpow(m, p - 1) % MOD;
@@ -143,11 +125,18 @@ long modpow(long m, long p) {
 }
 
 int main() {
-    int n;
-    cin >> n;
-    vector<int> a(n);
-    rep(i, n) cin >> a[i];
-    Sieve sieve(1e6);
-    rep(i, n) {
-        }
+    ll a, b;
+    cin >> n >> a >> b;
+    // debug("dfs");
+    COMinit();
+    mint ans(0);
+    ans += modpow(2, n) - 1;
+    mint nCa(COM(a)), nCb(COM(b));
+    // debug(nCa.value);
+    // debug(nCb.value);
+    ans -= nCa + nCb;
+    out(ans.value);
+    return 0;
 }
+
+d
