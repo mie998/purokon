@@ -1,7 +1,9 @@
+//https://qiita.com/drken/items/cce6fc5c579051e64fab
 template <class Abel>
 struct UnionFind {
     vector<int> par;
     vector<int> rank;
+    vector<int> size;
     vector<Abel> diff_weight;
 
     UnionFind(int n = 1, Abel SUM_UNITY = 0) {
@@ -11,9 +13,10 @@ struct UnionFind {
     void init(int n = 1, Abel SUM_UNITY = 0) {
         par.resize(n);
         rank.resize(n);
+        size.resize(n);
         diff_weight.resize(n);
         for (int i = 0; i < n; ++i)
-            par[i] = i, rank[i] = 0, diff_weight[i] = SUM_UNITY;
+            par[i] = i, rank[i] = 0, size[i] = 1, diff_weight[i] = SUM_UNITY;
     }
 
     int root(int x) {
@@ -24,6 +27,10 @@ struct UnionFind {
             diff_weight[x] += diff_weight[par[x]];
             return par[x] = r;
         }
+    }
+
+    int get_size(int x) {
+        return size[root(x)];
     }
 
     Abel weight(int x) {
@@ -44,6 +51,7 @@ struct UnionFind {
         if (rank[x] < rank[y]) swap(x, y), w = -w;
         if (rank[x] == rank[y]) ++rank[x];
         par[y] = x;
+        size[x] = size[y] = size[x] + size[y];
         diff_weight[y] = w;
         return true;
     }
