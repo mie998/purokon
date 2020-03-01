@@ -1,37 +1,62 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+// def
+#define debug(x) cout << #x << ": " << x << endl
+#define out(x) cout << x << endl
+#define repeat(i, a, b) for (int i = (a); i < (b); i++)
+#define revrepeat(i, a, b) for (int i = (b)-1; i >= (a); i--)
+#define rep(i, n) for (int i = 0; i < (int)(n); i++)
+#define revrep(i, n) for (int i = (n)-1; i >= 0; i--)
+#define all(x) (x).begin(), (x).end()
+#define CYES cout << "Yes" << endl
+#define CNO cout << "No" << endl
+#define SPC(x) cout << fixed << setprecision(x)
+#define ZERO(a) memset(a, 0, sizeof(a))
+#define MINUS(a) memset(a, 0xff, sizeof(a))
+
+typedef long long ll;
+typedef long double ld;
+typedef vector<int> vi;
+typedef vector<vector<int>> vii;
+typedef vector<ll> vl;
+typedef vector<vector<ll>> vll;
+typedef pair<int, int> P;
+typedef complex<ld> Point;
+const int MOD = 1e9 + 7;
+const int INF = 1e9;
+const int MAX_V = 1e5 + 5;
+const int MAX_N = 1e5 + 5;
+const double PI = acos(-1);
+
 int main() {
-    int n, m, i, j, k, temp;
-    scanf("%d%d", &n, &m);
-    priority_queue<int, vector<int>, greater<int>> que;
-    for (i = 0; i < n; i++) {
-        scanf("%d", &temp);
-        que.push(temp);
+    ll n, m;
+    cin >> n >> m;
+    map<ll, ll, greater<ll>> ma;
+    rep(i, n) {
+        ll temp;
+        cin >> temp;
+        ma[temp]++;
     }
-
-    int count, num;
-
-    for (i = 0; i < m; i++) {
-        scanf("%d%d", &count, &num);
-        if (que.top() >= num)
-            continue;
-        else {
-            for (j = 0; j < count; j++) {
-                que.pop();
-                que.push(num);
-                if (que.top() >= num) continue;
-            }
+    rep(i, m) {
+        ll b, c;
+        cin >> b >> c;
+        ma[c] += b;
+    }
+    ll cnt = n;
+    ll ans = 0;
+    for (auto iter = ma.begin(); iter != ma.end(); iter++) {
+        auto key = iter->first;
+        auto val = iter->second;
+        // debug(key);
+        // debug(val);
+        ans += key * val;
+        cnt -= val;
+        if (cnt <= 0) {
+            ans -= abs(cnt) * key;
+            break;
         }
     }
-
-    long long result = 0;
-
-    for (i = 0; i < n; i++) {
-        result += que.top();
-        que.pop();
-    }
-    cout << result << endl;
-
+    out(ans);
     return 0;
 }
