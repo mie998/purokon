@@ -22,13 +22,14 @@ typedef vector<vector<int>> vii;
 typedef vector<ll> vl;
 typedef vector<vector<ll>> vll;
 typedef pair<int, int> P;
-typedef complex<ld> Point;
 const int MOD = 1e9 + 7;
-const int INF = 1e9;
-const int MAX_V = 1e5 + 5;
+const int INF = __INT_MAX__;               // 2^31 - 1
+const long long INFLL = __LONG_LONG_MAX__; // 2^61 - 1
 const int MAX_N = 1e5 + 5;
 const double PI = acos(-1);
 
 int main() {
+    out(-INF);
+    out(-INFLL);
     return 0;
 }

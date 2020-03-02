@@ -1,4 +1,5 @@
-//https://qiita.com/drken/items/cce6fc5c579051e64fab
+// https://qiita.com/drken/items/cce6fc5c579051e64fab
+// UnionFind<int> uf(n);
 template <class Abel>
 struct UnionFind {
     vector<int> par;
@@ -24,11 +25,11 @@ struct UnionFind {
             return x;
         } else {
             int r = root(par[x]);
-            diff_weight[x] += diff_weight[par[x]];
+            diff_weight[x] += diff_weight[par[x]]; // path compression
             return par[x] = r;
         }
     }
-
+    // returns size of connected-tree number
     int get_size(int x) {
         return size[root(x)];
     }
@@ -38,7 +39,7 @@ struct UnionFind {
         return diff_weight[x];
     }
 
-    bool issame(int x, int y) {
+    bool is_same(int x, int y) {
         return root(x) == root(y);
     }
 
