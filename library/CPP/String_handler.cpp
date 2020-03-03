@@ -1,5 +1,4 @@
 const int MAX_N = 1e5;
-
 // Morris_Pratt: O(n)
 // 文字列 S が与えられたときに、各iについて「文字列S[0..i-1]の接頭辞と接尾辞が最大何文字一致しているか」を記録した配列を O(|S|)で構築するアルゴリズム
 // https://snuke.hatenablog.com/entry/2014/12/01/235807
