@@ -20,19 +20,19 @@ struct RollingHash {
         // powMemo 初期化
         powMemo[0] = 1;
         for (int i = 1; i < (int)powMemo.size(); i++)
-            powMemo[i] = CalcMod(Mul(powMemo[i - 1], Base));
+            powMemo[i] = calc_mod(mul(powMemo[i - 1], Base));
         // hashTable 初期化
         for (int i = 0; i < (int)s.length(); i++)
-            hash[i + 1] = CalcMod(Mul(hash[i], Base) + s[i]);
+            hash[i + 1] = calc_mod(mul(hash[i], Base) + s[i]);
     }
 
-    // Hash 値を求める関数
-    unsigned long long GetHash(int begin, int length) {
-        return CalcMod(hash[begin + length] + POSITIVIZER - Mul(hash[begin], powMemo[length]));
+    // 区間 [begin, begin + length] での Hash 値を求める関数
+    unsigned long long get_hash(int begin, int length) {
+        return calc_mod(hash[begin + length] + POSITIVIZER - mul(hash[begin], powMemo[length]));
     }
 
     // オーバーフロー対策
-    unsigned long long Mul(unsigned long long l, unsigned long long r) {
+    unsigned long long mul(unsigned long long l, unsigned long long r) {
         auto lu = l >> 31;
         auto ld = l & MASK31;
         auto ru = r >> 31;
@@ -41,7 +41,7 @@ struct RollingHash {
         return ((lu * ru) << 1) + ld * rd + ((middleBit & MASK30) << 31) + (middleBit >> 30);
     }
 
-    unsigned long long Mul(unsigned long long l, unsigned int r) {
+    unsigned long long mul(unsigned long long l, unsigned int r) {
         auto lu = l >> 31;
         auto rd = r & MASK31;
         auto middleBit = lu * rd;
@@ -49,7 +49,7 @@ struct RollingHash {
     }
 
     // mod 2^61-1を計算する関数
-    unsigned long long CalcMod(unsigned long long val) {
+    unsigned long long calc_mod(unsigned long long val) {
         val = (val & MODL) + (val >> 61);
         if (val >= MODL) val -= MODL;
         return val;
@@ -57,12 +57,12 @@ struct RollingHash {
 
     // S[a:], T[b:] の LCP (Longest Common Prefix) を求めるる
     // O(log N)
-    unsigned int GetLCP(int a, int b) {
+    unsigned int get_lcp(int a, int b) {
         int len = min((int)hash.size() - a, (int)hash.size() - b);
         int low = 0, high = len;
         while (high - low > 1) {
             int mid = (low + high) >> 1;
-            if (GetHash(a, mid) != GetHash(b, mid))
+            if (get_hash(a, mid) != get_hash(b, mid))
                 high = mid;
             else
                 low = mid;
