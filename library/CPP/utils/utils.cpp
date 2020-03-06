@@ -11,8 +11,8 @@ bool compairTuple1(const P3 &firstElof, const P3 &secondElof) {
 }
 
 // moving 4-direction
-int dx[4] = {1, 0, -1, 0};
-int dy[4] = {0, 1, 0, -1};
+int dx[] = {1, 1, 1, -1, -1, -1, 0, 0};
+int dy[] = {1, 0, -1, 1, 0, -1, 1, -1};
 
 long long modpow(long long m, long long p) {
     if (p == 0) return 1;
@@ -77,16 +77,6 @@ long long fact(int n) {
     if (fac[n]) return fac[n];
     return fac[n] = (fact(n - 1) * n) % MOD;
 }
-
-// adjecent-list
-struct Edge {
-    int to;
-    int weight;
-};
-const int MAX_N = 1e5 + 5;
-vector<Edge> Graph[MAX_N];
-bool checked[MAX_N];
-int color[MAX_N];
 
 // how to use priority_queue on pair
 auto comPair = [](const P &firstElof, const P &secondElof) {

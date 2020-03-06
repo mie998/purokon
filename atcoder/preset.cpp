@@ -8,6 +8,7 @@ using namespace std;
 #define revrepeat(i, a, b) for (int i = (b)-1; i >= (a); i--)
 #define rep(i, n) for (int i = 0; i < (int)(n); i++)
 #define revrep(i, n) for (int i = (n)-1; i >= 0; i--)
+#define for_each(e, v) for (auto &e : v)
 #define all(x) (x).begin(), (x).end()
 #define CYES cout << "Yes" << endl
 #define CNO cout << "No" << endl
@@ -29,7 +30,5 @@ const int MAX_N = 1e5 + 5;
 const double PI = acos(-1);
 
 int main() {
-    out(-INF);
-    out(-INFLL);
     return 0;
 }
