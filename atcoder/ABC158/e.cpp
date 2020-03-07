@@ -23,23 +23,47 @@ typedef vector<vector<int>> vii;
 typedef vector<ll> vl;
 typedef vector<vector<ll>> vll;
 typedef pair<int, int> P;
-const int MOD = 1e9 + 7;
 const int INF = __INT_MAX__;               // 2^31 - 1
 const long long INFLL = __LONG_LONG_MAX__; // 2^61 - 1
 const int MAX_N = 1e5 + 5;
 const double PI = acos(-1);
 
-bool dp[100005];
+int MOD;
+long long modpow(long long m, long long p) {
+    if (p == 0) return 1;
+    if (p % 2)
+        return m * modpow(m, p - 1) % MOD;
+    else {
+        long res = modpow(m, p / 2);
+        return res * res % MOD;
+    }
+}
+
 int main() {
-    int n, k;
-    cin >> n >> k;
-    vi a(n);
-    rep(i, n) cin >> a[i];
-    rep(i, k + 1) {
-        rep(j, n) {
-            if (i + a[j] <= k && !dp[i]) dp[i + a[j]] = true;
+    int n, p;
+    cin >> n >> p;
+    string s;
+    MOD = p;
+    cin >> s;
+    reverse(all(s));
+    ll ans = 0;
+    if (p == 2 || p == 5) {
+        rep(i, n) {
+            if ((s[i] - '0') % p == 0)
+                ans += n - i;
+        }
+    } else {
+        map<int, ll> cnt;
+        ll sum = 0;
+        rep(i, n) {
+            int d = (s[i] - '0') * modpow(10, i);
+            sum = (sum + d) % p;
+            cnt[sum]++;
+        }
+
+        rep(i, p) {
+            ans += cnt[i] * (cnt[i] - 1) / 2;
         }
     }
-    dp[k] ? out("First") : out("Second");
-    return 0;
+    out(ans);
 }

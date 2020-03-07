@@ -29,17 +29,46 @@ const long long INFLL = __LONG_LONG_MAX__; // 2^61 - 1
 const int MAX_N = 1e5 + 5;
 const double PI = acos(-1);
 
-bool dp[100005];
 int main() {
-    int n, k;
-    cin >> n >> k;
-    vi a(n);
-    rep(i, n) cin >> a[i];
-    rep(i, k + 1) {
-        rep(j, n) {
-            if (i + a[j] <= k && !dp[i]) dp[i + a[j]] = true;
+    string s;
+    int q;
+    cin >> s >> q;
+    bool r = false;
+    deque<char> dq;
+    rep(i, s.size()) {
+        dq.push_back(s[i]);
+    }
+    rep(i, q) {
+        int x;
+        cin >> x;
+        if (x == 1) {
+            if (r)
+                r = false;
+            else
+                r = true;
+        } else {
+            int t;
+            char c;
+            cin >> t >> c;
+            if (t == 1) {
+                if (r)
+                    dq.push_back(c);
+                else
+                    dq.push_front(c);
+            } else {
+                if (r)
+                    dq.push_front(c);
+                else
+                    dq.push_back(c);
+            }
         }
     }
-    dp[k] ? out("First") : out("Second");
+    string ans = "";
+    while (!dq.empty()) {
+        ans += dq.front();
+        dq.pop_front();
+    }
+    if (r) reverse(all(ans));
+    out(ans);
     return 0;
 }

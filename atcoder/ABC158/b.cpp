@@ -29,17 +29,14 @@ const long long INFLL = __LONG_LONG_MAX__; // 2^61 - 1
 const int MAX_N = 1e5 + 5;
 const double PI = acos(-1);
 
-bool dp[100005];
 int main() {
-    int n, k;
-    cin >> n >> k;
-    vi a(n);
-    rep(i, n) cin >> a[i];
-    rep(i, k + 1) {
-        rep(j, n) {
-            if (i + a[j] <= k && !dp[i]) dp[i + a[j]] = true;
-        }
-    }
-    dp[k] ? out("First") : out("Second");
+    ll n, a, b;
+    cin >> n >> a >> b;
+    ll cnt = n / (a + b);
+    ll ans = 0;
+    ans += cnt * a;
+    n -= cnt * (a + b);
+    ans += min(n, a);
+    out(ans);
     return 0;
 }
