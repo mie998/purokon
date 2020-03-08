@@ -29,36 +29,23 @@ const long long INFLL = __LONG_LONG_MAX__; // 2^61 - 1
 const int MAX_N = 1e5 + 5;
 const double PI = acos(-1);
 
-ll dp[3005][3005];
-ll a[3005];
-bool judge_bin;
-ll solve(int l, int r) {
-    if (dp[l][r])
-        return dp[l][r];
-
-    bool plus = (r + l) % 2 == judge_bin;
-    if (l == r) {
-        if (plus)
-            return a[l];
-        else
-            return -a[l];
-    }
-
-    // debug(l);
-    // debug(r);
-    if (plus) {
-        dp[l][r] = max(solve(l + 1, r) + a[l], solve(l, r - 1) + a[r]);
-    } else {
-        dp[l][r] = min(solve(l + 1, r) - a[l], solve(l, r - 1) - a[r]);
-    }
-    return dp[l][r];
-};
-
 int main() {
-    ll n;
-    cin >> n;
-    rep(i, n) cin >> a[i + 1];
-    judge_bin = (n + 1) % 2;
-    out(solve(1, n));
-    return 0;
+    string s;
+    cin >> s;
+    bool ok = true;
+    rep(i, s.size()) {
+        if (i % 2 == 0) {
+            if (s[i] != 'h')
+                ok = false;
+        } else {
+            if (s[i] != 'i')
+                ok = false;
+        }
+    }
+    if (s.back() != 'i')
+        ok = false;
+    if (ok)
+        cout << "Yes" << endl;
+    else
+        cout << "No" << endl;
 }
