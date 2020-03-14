@@ -136,3 +136,9 @@ inline bool chmax(T &a, T b) {
     }
     return false;
 }
+
+// n次元配列の初期化。第２引数の型のサイズごとに初期化していく。
+template <typename A, size_t N, typename T>
+void Fill(A (&array)[N], const T &val) {
+    std::fill((T *)array, (T *)(array + N), val);
+}

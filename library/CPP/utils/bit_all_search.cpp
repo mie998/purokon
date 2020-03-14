@@ -1,5 +1,5 @@
+#define bit(n, k) ((n >> k) & 1) /*nのk bit目*/
 //以下は全て https://qiita.com/drken/items/7c6ff2aa4d8fce1c9361 を参考にしている。
-
 //普通のbit全探索
 int main() {
     int n = 5;
