@@ -45,7 +45,7 @@ string lcs_restore(string &x, string &y) {
     while (pre[xn][yn] != 0) {
         if (pre[xn][yn] == 1) {
             xn -= 1, yn -= 1;
-            ans += s[xn];
+            ans += x[xn];
         } else if (pre[xn][yn] == 2) {
             yn -= 1;
         } else {
