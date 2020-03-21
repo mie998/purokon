@@ -4,7 +4,7 @@ int prev[MAX_V]; // 最短路の直前の頂点
 void difkstra(int s) {
     fill(d, d + V, INF);
     fill(used, used + V, false);
-    fill(prev, pref + V, -1);
+    fill(prev, prev + V, -1);
     d[s] = 0;
 
     while (true) {
