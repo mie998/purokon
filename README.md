@@ -9,9 +9,13 @@ All of my submission history on atcoder.
 - **etc**  
 Some usefun tools.
 
-- **library**   
+- **library**
 My competitive programming library.  
-Some of them are imported from other articles, so I don't allow you to just copy them. (please import from original article)
+Some of them were imported from other articles, so I don't allow you to just copy them. (please import from original article)
 
-- to do
-enable user snippet (setting on .vscode directory)
+## notes
+- how to build?
+ctrl+shift+b
+
+- how to debug?
+after build written above, press debug button (remember to set breakpoints)
