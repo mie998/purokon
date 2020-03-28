@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-// def
+//def
 #define debug(x) cout << #x << ": " << x << endl
 #define out(x) cout << x << endl
 #define repeat(i, a, b) for (int i = (int)(a); i < (int)(b); i++)
@@ -29,8 +29,53 @@ constexpr long long INFLL = __LONG_LONG_MAX__; // 2^61 - 1
 constexpr int MAX_N = 1e5 + 5;
 constexpr double PI = acos(-1);
 
+template <class T>
+inline bool chmin(T &a, T b) {
+    if (a > b) {
+        a = b;
+        return true;
+    }
+    return false;
+}
+template <class T>
+inline bool chmax(T &a, T b) {
+    if (a < b) {
+        a = b;
+        return true;
+    }
+    return false;
+}
+
 int main() {
     cin.tie(0);
     ios::sync_with_stdio(false);
+    ll k, n;
+    cin >> k >> n;
+    vl a(n);
+    rep(i, n) cin >> a[i];
+
+    ll l, r;
+    ll ans = INF;
+    rep(i, n) {
+        if (i - 1 < 0)
+            l = a[n - 1];
+        else
+            l = a[i - 1];
+        if (i == n - 1)
+            r = a[0];
+        else
+            r = a[i + 1];
+
+        ll l_dist = abs(l - a[i]);
+        ll r_dist = abs(r - a[i]);
+        chmin(l_dist, k - l_dist);
+        chmin(r_dist, k - r_dist);
+        ll dist = min(k - l_dist, k - r_dist);
+        // debug(l_dist);
+        // debug(r_dist);
+        // debug(dist);
+        chmin(ans, dist);
+    }
+    out(ans);
     return 0;
 }

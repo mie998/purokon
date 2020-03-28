@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-// def
+//def
 #define debug(x) cout << #x << ": " << x << endl
 #define out(x) cout << x << endl
 #define repeat(i, a, b) for (int i = (int)(a); i < (int)(b); i++)
@@ -32,5 +32,21 @@ constexpr double PI = acos(-1);
 int main() {
     cin.tie(0);
     ios::sync_with_stdio(false);
+
+    int n, x, y;
+    cin >> n >> x >> y;
+    map<int, int> dict;
+    repeat(i, 1, n + 1) {
+        repeat(j, i + 1, n + 1) {
+            int i_j = j - i;
+            int i_x_y_j = abs(i - x) + 1 + abs(j - y);
+            int dist = min(i_j, i_x_y_j);
+            dict[dist]++;
+        }
+    }
+
+    repeat(i, 1, n) {
+        out(dict[i]);
+    }
     return 0;
 }

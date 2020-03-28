@@ -47,6 +47,9 @@
 			"constexpr double PI = acos(-1);",
 			"",
 			"int main() {",
+			"\tcin.tie(0);",
+			"\tios::sync_with_stdio(false);",
+			"\t",
 			"\treturn 0;",
 			"}"
 		],
@@ -191,6 +194,15 @@
 			"}"
 		],
 		"description": "chmax and chmin"
+	},
+	"lambda snippet": {
+		"prefix": "lambda",
+		"body": [
+			"auto ${1} = [${2}](${3}) {",
+			"\t${4:/* code */}",
+			"}"
+		],
+		"description": ""
 	},
 	"rep snippet": {
 		"prefix": "rep",

@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-// def
+//def
 #define debug(x) cout << #x << ": " << x << endl
 #define out(x) cout << x << endl
 #define repeat(i, a, b) for (int i = (int)(a); i < (int)(b); i++)
@@ -32,5 +32,12 @@ constexpr double PI = acos(-1);
 int main() {
     cin.tie(0);
     ios::sync_with_stdio(false);
+
+    string s;
+    cin >> s;
+    if (s[2] == s[3] and s[4] == s[5])
+        CYES;
+    else
+        CNO;
     return 0;
 }
