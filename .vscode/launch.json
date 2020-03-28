@@ -9,10 +9,14 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/exec",
-            "args": [],
+            // "console": "integratedTerminal",
+            "cwd": "${fileDirname}",
+            "args": [
+                "<",
+                "${workspaceFolder}/etc/input.txt"
+            ],
             "environment": [],
             "stopAtEntry": true,
-            "cwd": "${fileDirname}",
             "externalConsole": false,
             "miDebuggerPath": "/usr/bin/gdb",
             "MIMode": "gdb",

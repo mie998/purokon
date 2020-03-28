@@ -142,3 +142,14 @@ template <typename A, size_t N, typename T>
 void Fill(A (&array)[N], const T &val) {
     std::fill((T *)array, (T *)(array + N), val);
 }
+
+// コンテナ出力効率化
+template <class Type>
+void line(const Type &a) {
+    int cnt = 0;
+    for (const auto &elem : a) {
+        if (cnt++) cout << ' ';
+        cout << elem;
+    }
+    cout << '\n';
+}

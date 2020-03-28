@@ -72,3 +72,8 @@ void Z_algorithm(string S) {
         j -= k;
     }
 }
+
+// 回文判定
+bool is_palindrome(string const &s) {
+    return s == string(s.rbegin(), s.rend());
+}

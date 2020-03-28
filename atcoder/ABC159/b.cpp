@@ -100,16 +100,13 @@ int main() {
     int n = s.size();
     bool ok = true;
     auto is_palindrome = [](string s) {
-        rep(i, s.size()) {
-            if (s[i] != s[s.size() - i - 1])
-                return false;
-        }
-        return true;
+        return s == string(s.rbegin(), s.rend());
     };
     // debug(s.substr(0, (n - 1) / 2));
     // debug(s.substr((n + 3) / 2 - 1, n - 1));
-    ok = ok && is_palindrome(s.substr(0, (n - 1) / 2));
-    ok = ok && is_palindrome(s.substr((n + 3) / 2 - 1, n - 1));
+    ok = ok and is_palindrome(s);
+    ok = ok and is_palindrome(s.substr(0, (n - 1) / 2));
+    ok = ok and is_palindrome(s.substr((n + 3) / 2 - 1));
 
     if (ok)
         CYES;

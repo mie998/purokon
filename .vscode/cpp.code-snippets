@@ -170,6 +170,28 @@
 		],
 		"description": "calculate fact and combination"
 	},
+	"change max-min": {
+		"prefix": "change",
+		"body": [
+			"template <class T>",
+			"inline bool chmin(T &a, T b) {",
+			"if (a > b) {",
+			"a = b;",
+			"return true;",
+			"}",
+			"return false;",
+			"}",
+			"template <class T>",
+			"inline bool chmax(T &a, T b) {",
+			"if (a < b) {",
+			"a = b;",
+			"return true;",
+			"}",
+			"return false;",
+			"}"
+		],
+		"description": "chmax and chmin"
+	},
 	"rep snippet": {
 		"prefix": "rep",
 		"body": [
