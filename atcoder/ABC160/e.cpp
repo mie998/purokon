@@ -33,5 +33,43 @@ int main() {
     cin.tie(0);
     ios::sync_with_stdio(false);
 
+    ll x, y, a, b, c;
+    cin >> x >> y >> a >> b >> c;
+    vector<pair<char, ll>> apples;
+    rep(i, a + b + c) {
+        ll temp;
+        cin >> temp;
+        if (i < a) {
+            apples.emplace_back('P', temp);
+        } else if (i < a + b) {
+            apples.emplace_back('Q', temp);
+        } else {
+            apples.emplace_back('R', temp);
+        }
+    }
+    auto comPair = [&](pair<char, ll> one, pair<char, ll> two) {
+        return one.second > two.second;
+    };
+    sort(all(apples), comPair);
+    ll rx, ry, rz, idx, ans;
+    idx = rx = ry = rz = ans = 0;
+    for (; rx + ry + rz < x + y; idx++) {
+        char F = apples[idx].first;
+        ll val = apples[idx].second;
+        if (F == 'P' and rx < x) {
+            rx++;
+            ans += val;
+        }
+        if (F == 'Q' and ry < y) {
+            ry++;
+            ans += val;
+        }
+        if (F == 'R') {
+            rz++;
+            ans += val;
+        }
+    }
+
+    out(ans);
     return 0;
 }
