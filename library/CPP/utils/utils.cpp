@@ -24,10 +24,10 @@ long long modpow(long long m, long long p) {
     }
 }
 
-ll modinv(ll a, ll m) {
-    ll b = m, u = 1, v = 0;
+long long modinv(long long a, long long m) {
+    long long b = m, u = 1, v = 0;
     while (b) {
-        ll t = a / b;
+        long long t = a / b;
         a -= t * b;
         swap(a, b);
         u -= t * v;
@@ -152,4 +152,26 @@ void line(const Type &a) {
         cout << elem;
     }
     cout << '\n';
+}
+
+// import from https://rsk0315.github.io/library/library/utility/make/vector.cpp.html
+namespace detail {
+template <typename Tp, size_t Nb>
+auto make_vector(std::vector<size_t> &sizes, Tp const &x) {
+    if constexpr (Nb == 1) {
+        return std::vector(sizes[0], x);
+    } else {
+        size_t size = sizes[Nb - 1];
+        sizes.pop_back();
+        return std::vector(size, make_vector<Tp, Nb - 1>(sizes, x));
+    }
+}
+} // namespace detail
+
+template <typename Tp, size_t Nb>
+auto make_vector(size_t const (&sizes)[Nb], Tp const &x = Tp()) {
+    std::vector<size_t> s(Nb);
+    for (size_t i = 0; i < Nb; ++i)
+        s[i] = sizes[Nb - i - 1];
+    return detail::make_vector<Tp, Nb>(s, x);
 }

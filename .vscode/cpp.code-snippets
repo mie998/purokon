@@ -19,8 +19,8 @@
             "using namespace std;",
             "",
             "//def",
-            "#define debug(x) cout << #x << \": \" << x << endl",
-            "#define out(x) cout << x << endl",
+            "#define debug(x) cout << #x << \": \" << x << '\\n'",
+            "#define out(x) cout << x << '\\n'",
             "#define repeat(i, a, b) for (int i = (int)(a); i < (int)(b); i++)",
             "#define revrepeat(i, a, b) for (int i = (int)(b)-1; i >= (int)(a); i--)",
             "#define rep(i, n) for (int i = 0; i < (int)(n); i++)",
@@ -194,6 +194,21 @@
             "}"
         ],
         "description": "chmax and chmin"
+    },
+    "modpow": {
+        "prefix": "modpow",
+        "body": [
+            "long long modpow(long long m, long long p) {",
+            "if (p == 0) return 1;",
+            "if (p % 2)",
+            "return m * modpow(m, p - 1) % MOD;",
+            "else {",
+            "long res = modpow(m, p / 2);",
+            "return res * res % MOD;",
+            "}",
+            "}"
+        ],
+        "description": "calculation of modpow"
     },
     "lambda snippet": {
         "prefix": "lambda",

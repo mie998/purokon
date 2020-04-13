@@ -6,7 +6,6 @@ void random_test_generator(int n_min, int n_max, int value_min, int value_max) {
 
     uniform_int_distribution<int> dist_N(n_min, n_max), dist_A(value_min, value_max);
     int N = dist_N(rnd);
-    int M = dist_N(rnd);
     ofstream outputfile;
     outputfile.open("../../../etc/input.txt", ios::trunc);
     if (!outputfile) {
