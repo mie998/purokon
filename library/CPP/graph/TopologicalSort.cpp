@@ -29,6 +29,7 @@ struct TopologicalSort {
         for (int u = 0; u < n; u++)
             if (!color[u] && !visit(u, sorted, color)) return false;
         reverse(sorted.begin(), sorted.end());
-        return true;
+        sorted.resize(n) // sorted がソートのたびに大きくなる不具合
+            return true;
     }
 };
