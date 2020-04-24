@@ -3,4 +3,5 @@
 .idea
 **/input.txt
 **/test.cpp
+**/pytest.py
 **/c_cpp_properties.json
