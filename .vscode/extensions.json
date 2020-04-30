@@ -11,7 +11,7 @@
         "rokoroku.vscode-theme-darcula",
         "dbaeumer.vscode-eslint",
         "esbenp.prettier-vscode",
-        "shinnn.stylelint",
+        "hex-ci.stylelint-plus",
         "ms-vscode.cpptools",
         "xaver.clang-format",
         "ms-python.python"
