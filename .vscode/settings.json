@@ -5,9 +5,10 @@
     "clang-format.language.cpp.style": "{ BasedOnStyle: LLVM, UseTab: Never, IndentWidth: 4, TabWidth: 4, BreakBeforeBraces: Attach, AllowShortIfStatementsOnASingleLine: true, IndentCaseLabels: false, ColumnLimit: 0, AccessModifierOffset: -4}",
     "C_Cpp.updateChannel": "Insiders",
     "[cpp]": {
-        "editor.defaultFormatter": "xaver.clang-format"
+        // "editor.defaultFormatter": "xaver.clang-format"
     },
     "[json]": {
         "editor.tabSize": 4
-    }
+    },
+    "python.formatting.provider": "yapf"
 }

@@ -5,3 +5,5 @@
 **/test.cpp
 **/pytest.py
 **/c_cpp_properties.json
+**/settings.json
+**/*_cache*
