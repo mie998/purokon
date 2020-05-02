@@ -47,53 +47,47 @@ inline bool chmax(T &a, T b) {
 }
 
 vii v;
-void dfs(vi &nums, int m, int n, int i) {
-    if (i == n) {
-        reverse(all(nums));
-        v.push_back(nums);
+void dfs(vi &x, int n, int m, int idx) {
+    if (idx == n) {
+        v.push_back(x);
         return;
     }
 
-    int nx = -1;
-    foreach (c, nums)
-        chmax(nx, c);
-    nx++;
+    int mx = x.back();
 
-    rep(j, nx + 1) {
-        vi x = nums;
-        x.push_back(j + 1);
-        dfs(x, m, n, i + 1);
+    repeat(j, mx, m + 1) {
+        vi z = x;
+        z.push_back(j);
+        dfs(z, n, m, idx + 1);
     }
 }
 
-int main() {
-    cin.tie(0);
-    ios::sync_with_stdio(false);
+struct p {
+    int a;
+    int b;
+    int c;
+    int d;
+};
 
+int main() {
     int n, m, q;
     cin >> n >> m >> q;
-    vii p(q, vi(4));
-    rep(i, q) {
-        vi t(4);
-        rep(j, 4) cin >> t[j];
-        t[0]--, t[1]--;
-        p[i] = t;
-    }
+    vector<p> query(q);
+    rep(i, q) cin >> query[i].a >> query[i].b >> query[i].c >> query[i].d;
 
-    vi e = {1};
     rep(i, m) {
-        vi z = e;
-        z[0] += i;
-        dfs(z, m, n, 0);
+        vi x = {i + 1};
+        dfs(x, n, m, 1);
     }
 
-    int ans = 0;
+    ll ans = 0;
     foreach (e, v) {
-        int cnt = 0;
+        ll cnt = 0;
         rep(i, q) {
-            if ((e[p[i][1]] - e[p[i][0]]) == p[i][2]) cnt += p[i][3];
+            auto pic = query[i];
+            if (e[pic.b - 1] - e[pic.a - 1] == pic.c) cnt += pic.d;
         }
-        ans = max(ans, cnt);
+        chmax(ans, cnt);
     }
 
     out(ans);
