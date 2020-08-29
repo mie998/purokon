@@ -45,51 +45,22 @@ inline bool chmax(T &a, T b) {
     }
     return false;
 }
-
 int main() {
     cin.tie(0);
     ios::sync_with_stdio(false);
 
-    int n, k;
-    cin >> n >> k;
-    vl p(n), c(n);
-    rep(i, n) cin >> p[i];
-    rep(i, n) cin >> c[i];
-    rep(i, n) p[i]--;
+    int n;
+    cin >> n;
+    vi a(n);
+    rep(i, n) cin >> a[i];
 
-    ll ans = -INF;
+    int mx = 0;
+    ll ans = 0;
     rep(i, n) {
-        ll cycle_sum = 0, cycle_volume = 0;
-        int v = i;
-        while (true) {
-            v = p[v];
-            cycle_sum += c[p[v]];
-            cycle_volume++;
-            if (v == i) break;
-        }
-
-        int div = k / cycle_volume;
-        int mod = k % cycle_volume;
-        ll score = 0;
-        score += max(0LL, div * cycle_sum);
-
-        ll div_sum = 0, div_sum_max = -INF;
-        if (div * cycle_sum < 0) mod = cycle_volume;
-        rep(j, mod) {
-            v = p[v];
-            div_sum += c[p[v]];
-            chmax(div_sum_max, div_sum);
-            if (j > k) break;
-            if (v == i) break;
-        }
-        score += div_sum_max;
-
-        chmax(ans, score);
-
-        // debug(i);
-        // debug(score);
+        chmax(mx, a[i]);
+        ans += max(0, mx - a[i]);
     }
-
     out(ans);
+
     return 0;
 }
