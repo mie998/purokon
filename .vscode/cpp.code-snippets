@@ -44,7 +44,6 @@
             "constexpr int INF = __INT_MAX__; // 2^31 - 1",
             "constexpr long long INFLL = __LONG_LONG_MAX__; // 2^61 - 1",
             "constexpr int MAX_N = 1e5 + 5;",
-            "constexpr double PI = acos(-1);",
             "",
             "int main() {",
             "\tcin.tie(0);",
