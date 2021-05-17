@@ -1,7 +1,6 @@
 *a.out
 *exec
 .idea/
-.vscode/
 **/input.txt
 **/test.cpp
 **/pytest.py
